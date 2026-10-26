@@ -199,6 +199,17 @@
     .flow-photo-grid div { padding: 11px 12px; background: #fff; border: 1px solid #edf0f4; border-radius: 10px; }
     .flow-photo-grid strong { display: block; margin-bottom: 5px; color: #174ea6; font-size: 12px; }
     .flow-photo-grid span { display: block; color: #41464b; font-size: 12px; line-height: 1.6; }
+    .reference-info { margin-top: 14px; padding: 16px; background: #fff; border: 1px solid #e1e5ed; border-radius: 15px; }
+    .reference-info h3 { margin: 0 0 7px; font-size: 15px; }
+    .reference-info > p { margin: 0 0 10px; color: #53575c; font-size: 12px; line-height: 1.7; }
+    .reference-table-wrap { overflow-x: auto; }
+    .reference-table { width: 100%; min-width: 520px; border-collapse: collapse; font-size: 12px; line-height: 1.6; }
+    .reference-table th, .reference-table td { padding: 9px 10px; border: 1px solid #e6eaf1; text-align: left; vertical-align: top; }
+    .reference-table thead th { color: #174ea6; background: #eef5ff; }
+    .reference-table tbody th { width: 20%; background: #f8fafd; font-weight: 700; }
+    .reference-info ul { margin: 8px 0 9px; padding-left: 20px; color: #41464b; font-size: 12px; line-height: 1.75; }
+    .reference-links { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
+    .reference-links a { display: inline-block; padding: 6px 10px; background: #e8f0fe; border-radius: 8px; color: #174ea6; font-size: 12px; text-decoration: none; }
     .flow-safety { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
     .flow-safety-card { padding: 13px; background: #fffdf5; border: 1px solid #f1e4bb; border-radius: 14px; }
     .flow-safety-card h3 { display: flex; align-items: center; gap: 7px; }
@@ -345,7 +356,7 @@
             <strong>원도급사</strong><span>공사 도급계약 · 현장 시공 총괄</span>
           </button>
           <button class="flow-card" type="button" data-flow-role="materials">
-            <strong>관급 자재 납품사</strong><span>발주기관 구매 · 현장 납품·설치 조건 확인</span>
+            <strong>관급자재 납품사</strong><span>발주기관 구매 · 현장 납품·설치 조건 확인</span>
           </button>
         </div>
         <section class="flow-conditional" aria-label="조건 충족 시 발주기관 직접 계약">
@@ -390,7 +401,7 @@
               <span><b>시공자</b>통보 후 7일 이내 계약</span>
             </div>
             <button class="flow-card flow-safety-link" type="button" data-flow-role="inspection">
-              <strong>지정된 독립 점검기관</strong><span>시공자 계약·선지급 → 정기·초기점검비 증빙 정산</span>
+              <strong>지정된 독립 점검기관</strong><span>시공자 계약 → 안전점검 실시·비용 증빙</span>
             </button>
             <p class="flow-safety-note">* 발주청이면 발주자, 발주청이 아니면 인·허가기관의 장이 지정합니다. 지침상 지정공고·평가 절차를 따릅니다.</p>
           </section>
@@ -402,17 +413,54 @@
               <span><b>도급인</b>개선 조치</span>
             </div>
             <button class="flow-card flow-safety-link" type="button" data-flow-role="technicalGuidance">
-              <strong>건설재해예방전문지도기관</strong><span>발주자가 직접 계약·지급하는 구조(법정 대상·계약 당사자 확인)</span>
+              <strong>건설재해예방전문지도기관</strong><span>법정 계약 당사자와 직접 계약(대상·예외 확인)</span>
             </button>
             <p class="flow-safety-note">* 법 제73조상 계약 당사자는 발주자 또는 건설공사도급인이며, 발주자로부터 최초 도급받은 수급인은 제외됩니다. 대상 공사는 착공일 전날까지 계약합니다.</p>
           </section>
         </div>
+        <section class="reference-info" aria-labelledby="safetyComparisonTitle">
+          <h3 id="safetyComparisonTitle">법정 안전점검 수행기관 vs 산업재해 예방 기술지도기관</h3>
+          <p>둘 다 공사 안전과 관련되지만 점검 대상과 계약관계가 다릅니다.</p>
+          <div class="reference-table-wrap">
+            <table class="reference-table">
+              <thead><tr><th scope="col">구분</th><th scope="col">법정 안전점검 수행기관</th><th scope="col">산업재해 예방 기술지도기관</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">목적</th><td>공사 중 구조물·시설 등의 안전성 점검</td><td>근로자의 산업재해 예방을 위한 기술지도</td></tr>
+                <tr><th scope="row">주요 업무</th><td>정기안전점검 및 필요 시 정밀안전점검 등</td><td>현장 위험요인 확인, 예방대책 지도 및 개선조치 확인</td></tr>
+                <tr><th scope="row">기관 선정</th><td>발주청 발주공사는 발주청이 수행기관을 지정</td><td>법정 계약 당사자가 지정받은 전문기관과 계약</td></tr>
+                <tr><th scope="row">계약 주체</th><td>시공자(건설사업자·주택건설등록업자)</td><td>법정 대상 공사의 발주자 또는 해당 건설공사도급인(최초 수급인 제외)</td></tr>
+                <tr><th scope="row">실무 예시</th><td>가설구조물·콘크리트 구조물의 안전성 점검</td><td>추락 위험, 작업방법 등 산업재해 예방 지도</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="margin-top:10px">※ 발주청이 아닌 공사의 안전점검기관 지정은 인·허가기관의 장이 담당합니다. 두 제도 모두 공사 규모·종류 등 법정 대상 여부를 먼저 확인해야 합니다.</p>
+          <div class="reference-links">
+            <a href="https://www.law.go.kr/법령/건설기술진흥법시행령/제100조의2" target="_blank" rel="noopener noreferrer">안전점검기관 지정 근거</a>
+            <a href="https://www.law.go.kr/법령/산업안전보건법/제73조" target="_blank" rel="noopener noreferrer">산업재해 예방 지도 근거</a>
+          </div>
+        </section>
+        <section class="reference-info" aria-labelledby="artworkCriteriaTitle">
+          <h3 id="artworkCriteriaTitle">건축물 미술작품 설치 기준</h3>
+          <p>큰 건축물이라도 모든 용도에 적용되는 것은 아닙니다. 건축물의 용도와 면적을 함께 확인합니다.</p>
+          <ul>
+            <li><strong>대상 용도:</strong> 업무시설·판매시설·숙박시설·의료시설 중 병원·법정 대상 공동주택 등 「문화예술진흥법 시행령」에 열거된 용도</li>
+            <li><strong>규모:</strong> 원칙적으로 대상 용도의 연면적 10,000㎡ 이상(증축은 증축되는 부분을 기준으로 판단)</li>
+            <li><strong>면적 제외:</strong> 주차장·기계실·전기실·변전실·발전실·공기조화실 등의 면적 제외. 복합용도는 대상 용도별 해당 면적의 합산 여부를 확인</li>
+            <li><strong>진행 절차:</strong> 설치 대상 검토 → 작품 선정 및 심의·평가 → 제작·설치 계약 → 설치·검수</li>
+            <li><strong>기금 대체:</strong> 국가·지방자치단체가 아닌 건축주는 법정 요건에 따라 설치 대신 문화예술진흥기금 출연을 선택할 수 있음</li>
+          </ul>
+          <p><strong>예시:</strong> 신축 사옥이 업무시설에 해당하고 법정 산정 연면적이 10,000㎡ 이상이면 미술작품 설치 대상인지 검토해야 합니다. 시·도 조례 및 사업별 요건도 함께 확인하세요.</p>
+          <div class="reference-links">
+            <a href="https://www.law.go.kr/법령/문화예술진흥법/제9조" target="_blank" rel="noopener noreferrer">문화예술진흥법 제9조</a>
+            <a href="https://www.law.go.kr/법령/문화예술진흥법시행령/제12조" target="_blank" rel="noopener noreferrer">시행령 제12조</a>
+          </div>
+        </section>
         <section class="flow-photo-notes" aria-label="제공된 사옥공사 업무흐름도 실무절차">
           <h3>사옥공사 업무흐름도 실무절차</h3>
           <p>사옥공사 주요 실무절차입니다. 세부 절차는 공사 및 발주기관별로 다를 수 있습니다.</p>
           <div class="flow-photo-grid">
             <div><strong>착공 전 인수·검토</strong><span>설계도서 이관·검토 후 공사 및 건설사업관리 용역의 계약 범위·성과품·승인 절차를 확인합니다.</span></div>
-            <div><strong>안전·장비 작업계획</strong><span>작업허가서, 일일 작업계획, 장비 반입 신청 및 고위험·양중 작업계획을 확인하고 승인 후 작업합니다.</span></div>
+            <div><strong>안전관리·장비 작업계획</strong><span>작업허가서, 일일 작업계획, 장비 반입 신청 및 고위험·양중 작업계획을 확인하고 승인 후 작업합니다.</span></div>
             <div><strong>품질·검측 기록</strong><span>레미콘 품질시험, 타설 입회, 자재·공정별 검사 결과와 사진·동영상 등 품질기록을 관리합니다.</span></div>
             <div><strong>폐기물·설계변경</strong><span>분리 발주된 폐기물 용역은 배출 일정·물량·종류, 계근 자료와 인계·처리 기록을 맞추고, 설계변경은 승인 절차 후 시행합니다.</span></div>
           </div>
@@ -492,7 +540,7 @@
       <div class="source-grid" id="allSources"></div>
       <p class="source-note">실무 예시는 구조를 이해하기 위한 가상 사례입니다. 원본 과제자료의 일반형을 보충 설명하고 법제처의 관련 조문을 연결했습니다. 이 페이지는 법률자문이 아니며, 계약 명의·발주 방식·적용 대상은 해당 공사 서류와 최신 규정으로 확인해야 합니다.</p>
     </section>
-    <footer class="footer">자료 기준: 제공된 계약관계도 및 안전업무 총괄표 · 법제처 국가법령정보센터 확인 · 2026.10.21</footer>
+    <footer class="footer">자료 기준: 계약관계도 및 안전업무 총괄표 · 관련 법령 확인(2026.10.26) · 개별 공사별 적용 요건 확인 필요</footer>
   </main>
 
   <script>
@@ -580,11 +628,11 @@
         sourceKeys: ["Google 검색: 나라장터 설치조건부 구매 사례", "계약·업무 관계도"]
       },
       artwork: {
-        id: "artwork", title: "건축물 미술작품 작가·설치사", kind: "제작·설치 계약", subtitle: "미술작품 의무 대상 건축물", parent: "contractOffice",
+        id: "artwork", title: "건축물 미술작품 작가·설치사", kind: "제작·설치 계약", subtitle: "미술작품 설치 대상 건축물", parent: "contractOffice",
         summary: "문화예술진흥법상 대상 건축물의 건축주는 건축물 미술작품을 설치하고, 작품의 감정·평가와 절차는 법령 및 시·도 조례에 따릅니다. 공공사업에서 발주기관이 건축주·계약 주체가 되는 경우 작품 작가 또는 제작·설치 업체와 별도 계약할 수 있습니다.",
         duties: ["건축물 용도·규모와 법정 설치 대상 여부 및 적용 절차를 확인합니다.", "시·도 조례에 따른 작품 선정·감정·평가 절차를 거쳐 작가 또는 제작·설치 업체와 계약합니다.", "작품 제작·운송·기초·전기·설치·검수·저작권과 하자 범위를 정하고 공사 현장과 일정을 조율합니다."],
         example: "미술작품 설치 대상인 공공청사를 신축하는 경우 발주기관이 지역 조례에 따른 심의·평가를 진행하고, 선정 작가와 작품 제작·설치 계약을 체결해 시공 일정 및 현장 인수 조건을 조정합니다.",
-        caution: "모든 공공건축물이 대상인 것은 아닙니다. 대상 용도·규모, 건축주 지위, 해당 시·도 조례와 심의 절차를 먼저 확인하세요. 표준계약서 사용 여부와 계약 방식도 발주기관 기준을 따릅니다.",
+        caution: "모든 건축물이 설치 대상인 것은 아닙니다. 법정 대상 용도와 연면적 10,000㎡ 기준(증축은 증축 부분 기준), 제외 면적, 건축주 유형, 시·도 조례 및 심의 절차를 확인하세요.",
         sourceKeys: ["문화예술진흥법 제9조·제9조의2", "문화예술진흥법 시행령 제12조", "Google 검색: 문체부 미술작품 표준계약서"]
       },
       subcontractor: {
