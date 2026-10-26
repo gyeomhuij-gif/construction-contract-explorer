@@ -262,6 +262,27 @@
       .flow-photo-grid { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+
+    /* 역할별 실무예시 그림: 외부 이미지 없이 반응형으로 렌더링 */
+    .example-visual { margin-top: 13px; overflow: hidden; border: 1px solid #dae5f3; border-radius: 14px; background: #fff; }
+    .example-visual-head { display:flex; align-items:center; gap:8px; padding:11px 13px; background:#eef5ff; border-bottom:1px solid #dce8f7; }
+    .example-visual-head strong { color:#174ea6; font-size:13px; }
+    .example-visual-head span { margin-left:auto; color:#53749e; font-size:11px; }
+    .example-visual-actors { display:grid; grid-template-columns: minmax(0,1fr) 30px minmax(0,1fr) 30px minmax(0,1fr); align-items:center; gap:5px; padding:15px 12px 12px; }
+    .example-actor { display:grid; justify-items:center; align-content:center; min-height:103px; gap:7px; padding:9px 4px; background:#eef5ff; border:1px solid #dbe9fc; border-radius:12px; text-align:center; }
+    .example-actor:nth-of-type(2) { background:#fff7e7; border-color:#f7e4bc; }
+    .example-actor:nth-of-type(3) { background:#ebf8ef; border-color:#d5eadc; }
+    .example-actor-emoji { display:grid; place-items:center; width:54px; height:52px; background:#fff; border:1px solid #e7ecf3; border-radius:15px; font-size:30px; line-height:1; }
+    .example-actor-label { color:#213044; font-size:11px; font-weight:750; overflow-wrap:anywhere; line-height:1.4; }
+    .example-visual-arrow { color:#5f85b5; text-align:center; font-size:23px; font-weight:700; }
+    .example-visual-section { padding:0 13px 14px; }
+    .example-visual-label { margin:0 0 9px; color:#174ea6; font-size:12px; font-weight:750; }
+    .example-visual-steps { display:grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap:6px; margin:0; padding:0; list-style:none; }
+    .example-visual-steps li { min-width:0; padding:9px 5px; background:#f5f8fc; border:1px solid #e5ecf5; border-radius:9px; text-align:center; color:#354357; font-size:11px; line-height:1.45; }
+    .example-visual-steps b { display:block; width:21px; height:21px; margin:0 auto 6px; border-radius:50%; background:#2771ba; color:#fff; font-size:11px; line-height:21px; }
+    .example-visual-foot { padding:9px 12px; color:#637286; background:#fbfcff; border-top:1px solid #ebeff5; font-size:10px; line-height:1.5; }
+    @media (max-width:560px) { .example-visual-actors { gap:3px; padding:10px 6px; grid-template-columns:minmax(0,1fr) 17px minmax(0,1fr) 17px minmax(0,1fr); } .example-actor { min-height:93px; } .example-actor-emoji { width:43px; height:42px; font-size:25px; } .example-visual-arrow { font-size:16px; } .example-visual-steps { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+
   </style>
 </head>
 <body>
@@ -445,6 +466,7 @@
               실무 예시
             </h3>
             <p id="detailExample"></p>
+            <div id="detailExampleVisual" class="example-visual" role="img" aria-label="선택한 계약 주체의 실무 예시 계약관계와 업무흐름"></div>
           </section>
           <section class="detail-block caution" id="cautionBlock">
             <h3>
@@ -740,6 +762,57 @@
       return link;
     }
 
+
+    const exampleVisuals = {
+      contractOffice: {"actors":[["🏛️","발주기관"],["📑","계약부서"],["🏗️","계약 상대방"]],"steps":["발주 요청","입찰·계약","계약 체결","계약 관리"],"tag":"기관 명의 계약"},
+      design: {"actors":[["🏛️","발주기관"],["📐","설계사"],["🏢","건설 현장"]],"steps":["설계용역 계약","도면·시방 작성","설계도서 제출","설계변경 협의"],"tag":"설계용역"},
+      prime: {"actors":[["🏛️","발주기관"],["🏗️","원도급사"],["👷","현장·협력사"]],"steps":["공사 도급계약","공정·품질 관리","현장 시공","검측·보고"],"tag":"공사 도급"},
+      cm: {"actors":[["🏛️","발주기관"],["📋","CM"],["🏗️","원도급사"]],"steps":["CM 용역계약","시공자료 검토","공정·품질 협의","발주청 보고"],"tag":"건설사업관리"},
+      materials: {"actors":[["🏛️","구매 주체"],["📦","자재 납품사"],["🏗️","공사 현장"]],"steps":["구매 주체 확인","자재 발주","납품·설치 구분","검수·인수"],"tag":"관급·사급 구분"},
+      wasteTreatment: {"actors":[["🏛️","발주기관"],["♻️","폐기물 처리업체"],["🚚","배출 현장"]],"steps":["분리발주 검토","처리용역 계약","폐기물 반출","계근·처리 기록"],"tag":"법정 요건 확인"},
+      installCondition: {"actors":[["🏛️","발주기관"],["🛠️","설치조건부 납품사"],["🏢","설치 현장"]],"steps":["물품구매 계약","장비 납품","현장 설치","시운전·인수"],"tag":"납품 + 설치"},
+      artwork: {"actors":[["🏛️","발주기관"],["🎨","작가·설치사"],["🏢","건축물"]],"steps":["대상 여부 확인","작품 심의·선정","제작·설치 계약","설치·인수"],"tag":"미술작품 설치"},
+      subcontractor: {"actors":[["🏗️","원도급사"],["👷","하도급사"],["🏢","공사 현장"]],"steps":["하도급계약","전문공종 시공","공정·검측 협의","완료·검수"],"tag":"전문공종"},
+      supplierPrime: {"actors":[["🏗️","원도급사"],["🪟","사급자재 업체"],["🏢","공사 현장"]],"steps":["구매·설치 계약","자재 제작","현장 납품·설치","검수·하자 확인"],"tag":"사급자재"},
+      equipmentVendor: {"actors":[["👷","장비 계약자"],["🏗️","장비 임대업체"],["🚧","작업 현장"]],"steps":["장비 임대계약","반입계획 확인","장비 투입·운영","작업·정산 확인"],"tag":"계약자 확인"},
+      inspection: {"actors":[["🏛️","지정권자"],["🔎","안전점검기관"],["🏗️","시공자"]],"steps":["지정 요청","기관 지정·통보","7일 이내 계약","점검·비용 정산"],"tag":"지정·계약 구분"},
+      technicalGuidance: {"actors":[["🏛️","발주자 등"],["🦺","기술지도기관"],["👷","현장 도급인"]],"steps":["법정 대상 확인","착공 전 계약","예방 기술지도","개선조치 확인"],"tag":"기술지도 계약"}
+    };
+    const exampleVisualEl = document.getElementById("detailExampleVisual");
+    function renderExampleVisual(role) {
+      const visual = exampleVisuals[role.id];
+      if (!visual) { exampleVisualEl.hidden = true; return; }
+      exampleVisualEl.hidden = false;
+      exampleVisualEl.replaceChildren();
+      const make = (tag, className, value) => {
+        const el = document.createElement(tag);
+        if (className) el.className = className;
+        if (value !== undefined) el.textContent = value;
+        return el;
+      };
+      const head = make("div", "example-visual-head");
+      head.append(make("strong", "", role.title + " · 계약관계"), make("span", "", visual.tag));
+      const actors = make("div", "example-visual-actors");
+      visual.actors.forEach(([emoji, label], i) => {
+        if (i) actors.append(make("span", "example-visual-arrow", "↔"));
+        const actor = make("div", "example-actor");
+        actor.append(make("span", "example-actor-emoji", emoji), make("span", "example-actor-label", label));
+        actors.append(actor);
+      });
+      const section = make("div", "example-visual-section");
+      section.append(make("div", "example-visual-label", "주요 업무흐름"));
+      const steps = make("ol", "example-visual-steps");
+      visual.steps.forEach((step, i) => {
+        const li = document.createElement("li");
+        li.append(make("b", "", String(i + 1)), document.createTextNode(step));
+        steps.append(li);
+      });
+      section.append(steps);
+      const foot = make("div", "example-visual-foot", "이해를 돕기 위한 예시 도식입니다. 실제 계약 당사자·적용 요건은 계약서와 관련 법령을 확인하세요.");
+      exampleVisualEl.append(head, actors, section, foot);
+      exampleVisualEl.setAttribute("aria-label", role.title + " 실무예시: " + visual.actors.map(item => item[1]).join(", ") + ". " + visual.steps.join(", "));
+    }
+
     function selectRole(id) {
       const role = roles[id];
       if (!role) return;
@@ -757,6 +830,7 @@
         return li;
       }));
       exampleEl.textContent = role.example;
+      renderExampleVisual(role);
       cautionEl.textContent = role.caution;
       sourceEl.replaceChildren(...role.sourceKeys.map(key => sourceByKey[key]).filter(Boolean).map(source => makeLink(source)));
     }
